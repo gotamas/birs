@@ -58,7 +58,7 @@ plt.rcParams.update({
 })
 
 # Load BIRS data
-df = pd.read_pickle('birs_flat.pkl')
+df = pd.read_pickle('data/birs_flat.pkl')
 df['date of fixing'] = pd.to_datetime(df['date of fixing'])
 df = df.sort_values('date of fixing').reset_index(drop=True)
 
@@ -966,15 +966,15 @@ hjm_model = {
     }
 }
 
-with open('hjm_model_params.json', 'w') as f:
+with open('data/hjm_model_params.json', 'w') as f:
     json.dump(hjm_model, f, indent=2)
-print("Saved hjm_model_params.json")
+print("Saved data/hjm_model_params.json")
 
 # Save forward rate matrix
 fwd_df = pd.DataFrame(fwd_matrix, columns=[f'{i+1}Y_fwd' for i in range(max_tenor)])
 fwd_df.insert(0, 'date', fwd_dates)
-fwd_df.to_pickle('forward_rates.pkl')
-print(f"Saved forward_rates.pkl ({len(fwd_df):,} rows)")
+fwd_df.to_pickle('data/forward_rates.pkl')
+print(f"Saved data/forward_rates.pkl ({len(fwd_df):,} rows)")
 
 print(f"\\n✅ HJM Model Summary:")
 print(f"  Factors:       {3} (PCA explains {cum_var[2]:.1f}%)")

@@ -49,7 +49,7 @@ plt.rcParams.update({
 })
 
 # Load data
-df = pd.read_pickle('birs_flat.pkl')
+df = pd.read_pickle('data/birs_flat.pkl')
 df['date of fixing'] = pd.to_datetime(df['date of fixing'])
 df = df.sort_values('date of fixing').reset_index(drop=True)
 
@@ -659,10 +659,10 @@ for t_idx, tenor in enumerate(maturities):
 cells.append(nbf.v4.new_markdown_cell("""## 11. Export Results"""))
 
 cells.append(nbf.v4.new_code_cell("""# Save the factors
-factors.to_pickle('ns_factors.pkl')
-factors.to_csv('ns_factors.csv', index=False, encoding='utf-8-sig')
-print(f"Saved ns_factors.pkl ({factors.shape[0]:,} rows)")
-print(f"Saved ns_factors.csv")
+factors.to_pickle('data/ns_factors.pkl')
+factors.to_csv('data/ns_factors.csv', index=False, encoding='utf-8-sig')
+print(f"Saved data/ns_factors.pkl ({factors.shape[0]:,} rows)")
+print(f"Saved data/ns_factors.csv")
 
 # Save model parameters
 import json
@@ -675,9 +675,9 @@ model_params = {
     'estimation_date': str(last_date.date()),
     'n_observations': int(len(factors)),
 }
-with open('ns_model_params.json', 'w') as f:
+with open('data/ns_model_params.json', 'w') as f:
     json.dump(model_params, f, indent=2)
-print("Saved ns_model_params.json")
+print("Saved data/ns_model_params.json")
 
 print(f"\\n✅ Model summary:")
 print(f"  λ = {LAM:.4f}")

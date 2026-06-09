@@ -69,7 +69,7 @@ plt.rcParams.update({
 })
 
 # Load BIRS data
-df = pd.read_pickle('birs_flat.pkl')
+df = pd.read_pickle('data/birs_flat.pkl')
 df['date of fixing'] = pd.to_datetime(df['date of fixing'])
 df = df.sort_values('date of fixing').reset_index(drop=True)
 

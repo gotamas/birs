@@ -13,9 +13,12 @@ import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 URL = "https://www.mnb.hu/letoltes/birs.xls"
-RAW_FILE = "birs.xls"
-OUTPUT_XLSX = "birs_flat.xlsx"
-OUTPUT_CSV = "birs_flat.csv"
+RAW_FILE = os.path.join("data", "birs.xls")
+OUTPUT_XLSX = os.path.join("data", "birs_flat.xlsx")
+OUTPUT_CSV = os.path.join("data", "birs_flat.csv")
+
+# Create data directory if it doesn't exist
+os.makedirs("data", exist_ok=True)
 
 # 1. Download the file
 print(f"Downloading {URL} ...")
@@ -166,7 +169,7 @@ print(f"\nExported to {OUTPUT_XLSX} ({os.path.getsize(OUTPUT_XLSX):,} bytes)")
 combined.to_csv(OUTPUT_CSV, index=False, encoding='utf-8-sig')
 print(f"Exported to {OUTPUT_CSV} ({os.path.getsize(OUTPUT_CSV):,} bytes)")
 
-OUTPUT_PKL = "birs_flat.pkl"
+OUTPUT_PKL = os.path.join("data", "birs_flat.pkl")
 combined.to_pickle(OUTPUT_PKL)
 print(f"Exported to {OUTPUT_PKL} ({os.path.getsize(OUTPUT_PKL):,} bytes)")
 
