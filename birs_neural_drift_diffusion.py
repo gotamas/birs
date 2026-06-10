@@ -86,7 +86,7 @@ class DiffusionNet(nn.Module):
         )
     def forward(self, x):
         # Volatility must be positive; Softplus guarantees this, 1e-4 avoids division by zero
-        return torch.softplus(self.net(x)) + 1e-4
+        return torch.nn.functional.softplus(self.net(x)) + 1e-4
 
 # Create models
 drift_model = DriftNet(state_dim=D_dim)
